@@ -1,0 +1,152 @@
+/*
+ * Thanks to the Noto Project people and to Google Inc. for making this font
+ * available under SIL Open Font License, and to Monotype for creating it.
+ */
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url('index_sans_r_400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+    src: url('index_sans_r_700.woff2') format('woff2');
+}
+
+:root {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1.2em;
+
+    /* Light and dark palettes based upon Material 3. */
+    --fg-light: #1C1B1F;
+    --bg-light: #FFFBFE;
+    --hovered-light: #E7E0EC;
+    --separator-light: #CAC4D0;
+
+    --fg-dark: #E6E1E5;
+    --bg-dark: #1C1B1F;
+    --hovered-dark: #49454F;
+    --separator-dark: #49454F;
+
+    /*
+    Default color scheme (light).
+    Applies to all color schemes in the specification, current and future.
+    This is intended to be overwritten in media queries as needed, and for
+    specific color schemes only (like dark, for example).
+    */
+    --fg: var(--fg-light);
+    --bg: var(--bg-light);
+    --hovered: var(--hovered-light);
+    --separator: var(--separator-light);
+}
+
+/* Dark color scheme. */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fg: var(--fg-dark);
+        --bg: var(--bg-dark);
+        --outline: var(--outline-dark);
+        --hovered: var(--hovered-dark);
+        --separator: var(--separator-dark);
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    min-width: fit-content;
+}
+
+body {
+    width: fit-content;
+    height: 100%;
+    margin: 0;
+    padding-top: max(env(safe-area-inset-top, 1em), 1em);
+    padding-right: max(env(safe-area-inset-right, 1em), 1em);
+    padding-bottom: max(env(safe-area-inset-bottom, 1em), 1em);
+    padding-left: max(env(safe-area-inset-left, 1em), 1em);
+    color: var(--fg);
+    background-color: var(--bg);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--fg);
+    white-space: nowrap;
+}
+
+a:hover {
+    text-decoration: underline dotted var(--outline) 0.1rem;
+    text-underline-offset: 0.2em;
+    background-color: var(--hovered);
+}
+
+header {
+    font-size: 3em;
+    margin: 1rem;
+    font-weight: 700;
+}
+
+header > * {
+    vertical-align: middle;
+}
+
+header > img {
+    max-width: 1em;
+    margin-right: 1rem;
+}
+
+ul {
+    margin: 1rem;
+    padding: 0;
+    list-style: "⁕" inside none;
+}
+
+li {
+    line-height: 1.5em;
+}
+
+li > a {
+    padding-left: 0.5rem;
+}
+
+details {
+    margin: 0.5rem 1rem;
+}
+
+details:not([open]):hover {
+    background-color: var(--hovered);
+}
+
+details > ul {
+    margin: 0 0 0 1.5rem;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    margin-left: 0;
+    background-image: linear-gradient(to right, var(--separator) 50%, var(--bg));
+}
+
+span.emoji {
+    display: inline-block;
+    width: 2em;
+}
