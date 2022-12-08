@@ -87,8 +87,6 @@ a {
 }
 
 a:hover {
-    text-decoration: underline dotted var(--outline) 0.1rem;
-    text-underline-offset: 0.2em;
     background-color: var(--hovered);
 }
 
@@ -96,15 +94,19 @@ header {
     font-size: 3em;
     margin: 1rem;
     font-weight: 700;
+    white-space: nowrap;
 }
 
-header > * {
+header * {
     vertical-align: middle;
 }
 
-header > img {
+header img {
     max-width: 1em;
-    margin-right: 1rem;
+}
+
+header a:hover {
+    background-color: initial;
 }
 
 ul {
