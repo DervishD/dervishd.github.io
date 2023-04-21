@@ -34,12 +34,7 @@
     --hovered-dark: #49454F;
     --separator-dark: #49454F;
 
-    /*
-    Default color scheme (light).
-    Applies to all color schemes in the specification, current and future.
-    This is intended to be overwritten in media queries as needed, and for
-    specific color schemes only (like dark, for example).
-    */
+    /* Default color scheme is light. */
     --fg: var(--fg-light);
     --bg: var(--bg-light);
     --hovered: var(--hovered-light);
