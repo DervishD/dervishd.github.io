@@ -23,22 +23,27 @@
     font-family: "Noto Sans", sans-serif;
     font-size: 1.2em;
 
-    /* Light and dark palettes based upon Material 3. */
-    --fg-light: #1C1B1F;
-    --bg-light: #FFFBFE;
-    --hovered-light: #E7E0EC;
-    --separator-light: #CAC4D0;
+    --fg-light: DarkSlateGray;
+    --bg-light: Gainsboro;
+    --bookmark-fg-light: var(--fg-light);
+    --bookmark-bg-light: LightSteelBlue;
+    --bookmark-hover-fg-light: var(--fg-light);
+    --bookmark-hover-bg-light: DeepSkyBlue;
 
-    --fg-dark: #E6E1E5;
-    --bg-dark: #1C1B1F;
-    --hovered-dark: #49454F;
-    --separator-dark: #49454F;
+    --fg-dark: Gainsboro;
+    --bg-dark: DarkSlateGray;
+    --bookmark-fg-dark: var(--fg-dark);
+    --bookmark-bg-dark: DimGray;
+    --bookmark-hover-fg-dark: var(--fg_dark);
+    --bookmark-hover-bg-dark: Gray;
 
     /* Default color scheme is light. */
     --fg: var(--fg-light);
     --bg: var(--bg-light);
-    --hovered: var(--hovered-light);
-    --separator: var(--separator-light);
+    --bookmark-fg: var(--bookmark-fg-light);
+    --bookmark-bg: var(--bookmark-bg-light);
+    --bookmark-hover-fg: var(--bookmark-hover-fg-light);
+    --bookmark-hover-bg: var(--bookmark-hover-bg-light);
 }
 
 /* Dark color scheme. */
@@ -46,9 +51,10 @@
     :root {
         --fg: var(--fg-dark);
         --bg: var(--bg-dark);
-        --outline: var(--outline-dark);
-        --hovered: var(--hovered-dark);
-        --separator: var(--separator-dark);
+        --bookmark-fg: var(--bookmark-fg-dark);
+        --bookmark-bg: var(--bookmark-bg-dark);
+        --bookmark-hover-fg: var(--bookmark-hover-fg-dark);
+        --bookmark-hover-bg: var(--bookmark-hover-bg-dark);
     }
 }
 
@@ -74,15 +80,16 @@ body {
     color: var(--fg);
     background-color: var(--bg);
     overflow-x: hidden;
+    user-select: none;
+}
+
+:focus-visible {
+    outline: none;
 }
 
 a {
     text-decoration: none;
     color: var(--fg);
-}
-
-a:hover {
-    background-color: var(--hovered);
 }
 
 header {
@@ -104,43 +111,68 @@ header a:hover {
     background-color: initial;
 }
 
+hr {
+    height: 1px;
+    border: none;
+    margin-left: 0;
+    background-image: linear-gradient(to right, var(--fg) 10%, var(--bg));
+}
+
 ul {
     margin: 1rem;
     padding: 0;
-    list-style: "⁕" inside none;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75em;
 }
 
 li {
+    background-color: var(--bookmark-bg);
     line-height: 1.5em;
     white-space: nowrap;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    transition: background-color 250ms ease-in-out;
+}
+
+li:hover, li:focus-within {
+    background-color: var(--bookmark-hover-bg);
 }
 
 li > a {
-    padding-left: 0.5rem;
+    padding-left: 0.33em;
+    color: var(--bookmark-fg);
+}
+
+li img {
+    height: 32px;
+    width: auto;
+    vertical-align: middle;
 }
 
 details {
     margin: 0.5rem 1rem;
 }
 
-details:not([open]):hover {
-    background-color: var(--hovered);
+details > ul {
+    margin: 1em 0 0 1.5em;
 }
 
-details > ul {
-    margin: 0 0 0 1.5rem;
+details:not([open]) > summary {
+    font-weight: initial;
+    padding-left: initial;
+}
+
+details:not([open]):hover > summary, details[open] > summary, details > summary:focus-visible {
+    font-weight: 700;
+    padding-left: 0.5em;
 }
 
 summary {
+    transition: padding-left 250ms ease-in-out;
     cursor: pointer;
-    font-weight: 700;
-}
-
-hr {
-    height: 1px;
-    border: none;
-    margin-left: 0;
-    background-image: linear-gradient(to right, var(--separator) 50%, var(--bg));
 }
 
 span.emoji {

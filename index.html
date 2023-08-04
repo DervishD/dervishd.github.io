@@ -16,22 +16,22 @@
 
 <body>
     <header>
-        <a href="https://github.com/DervishD" target="_blank">
+        <a tabindex="-1" href="https://github.com/DervishD" target="_blank">
             <img src="avatar.png" alt="Raúl Núñez de Arenas Coronado">
             <span>DervishD</span>
         </a>
     </header>
     <hr>
     <ul>
-        <li><a href="https://www.youtube.com/playlist?list=WL" target="_blank"><span class="emoji">🎬</span>Watch Later</a></li>
-        <li><a href="https://www.amazon.es/vine/vine-items?queue=potluck" target="_blank"><span class="emoji">🎁</span>Vine</a></li>
-        <li><a href="https://www.amazon.es/review/review-your-purchases/listing" target="_blank"><span class="emoji">⭐</span>Reseñas</a></li>
-        <li><a href="https://www.amazon.es/hz/feedback" target="_blank"><span class="emoji">🌟</span>Vendors</a></li>
-        <li><a href="https://feedly.com/i/my" target="_blank"><span class="emoji">🟩</span>Feedly</a></li>  <!-- cspell: ignore Feedly -->
-        <li><a href="http://www.aemet.es/es/eltiempo/prediccion/municipios/collado-villalba-id28047" target="_blank"><span class="emoji">☔</span>AEMET</a></li>  <!-- cspell: ignore AEMET -->
-        <li><a href="https://www.eltiempo.es/collado-villalba.html" target="_blank"><span class="emoji">☔</span>El tiempo</a></li>
-        <li><a href="http://radio.garden/visit/collado-villalba/BsinZszD" target="_blank"><span class="emoji">📻</span>Radio Garden</a></li>
-        <li><a href="https://carpetaciudadana.gob.es" target="_blank"><span class="emoji">💼</span>Mi carpeta ciudadana</a></li>
+        <li><a href="https://www.youtube.com/playlist?list=WL" target="_blank">Watch Later</a></li>
+        <li><a href="https://www.amazon.es/vine/vine-items?queue=potluck" target="_blank">Vine</a></li>
+        <li><a href="https://www.amazon.es/review/review-your-purchases/listing" target="_blank">Reseñas</a></li>
+        <li><a href="https://www.amazon.es/hz/feedback" target="_blank">Vendors</a></li>
+        <li><a href="https://feedly.com/i/my" target="_blank">Feedly</a></li>  <!-- cspell: ignore Feedly -->
+        <li><a href="http://www.aemet.es/es/eltiempo/prediccion/municipios/collado-villalba-id28047" target="_blank">AEMET</a></li>  <!-- cspell: ignore AEMET -->
+        <li><a href="https://www.eltiempo.es/collado-villalba.html" target="_blank">El tiempo</a></li>
+        <li><a href="http://radio.garden/visit/collado-villalba/BsinZszD" target="_blank">Radio Garden</a></li>
+        <li><a href="https://carpetaciudadana.gob.es" target="_blank">Mi carpeta ciudadana</a></li>
     </ul>
     <hr>
     <details>
@@ -144,5 +144,16 @@
             <li><a href="https://www.maxwells-equations.com/" target="_blank"><span class="emoji">🧲</span>Ecuaciones de Maxwell</a></li>
         </ul>
     </details>
+    <script>
+        [...document.getElementsByTagName('li')].forEach(element => {
+            const bookmark = element.firstElementChild;
+            const target = new URL(bookmark.href);
+            if (target.hostname) {
+                const favicon = document.createElement('img');
+                favicon.src = `http://www.google.com/s2/favicons?domain=${target.hostname}&sz=32`;
+                bookmark.before(favicon);
+            }
+        });
+    </script>
 </body>
 </html>
