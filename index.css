@@ -83,10 +83,6 @@ body {
     user-select: none;
 }
 
-:focus-visible {
-    outline: none;
-}
-
 a {
     text-decoration: none;
     color: var(--fg);
@@ -118,17 +114,23 @@ hr {
     background-image: linear-gradient(to right, var(--fg) 10%, var(--bg));
 }
 
-ul {
-    margin: 1rem;
-    padding: 0;
-    list-style: none;
+summary:focus-visible, .bookmarks > a:focus-visible {
+    outline: none;
+    /* outline: 3px solid black; */
+    box-shadow: 0 0 .25em var(--fg);
+}
+
+.bookmarks {
+    margin: 1em;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: .75em;
 }
 
-li {
+.bookmarks > a {
+    display: block;
+    color: var(--bookmark-fg);
     background-color: var(--bookmark-bg);
     line-height: 1.5em;
     white-space: nowrap;
@@ -137,42 +139,33 @@ li {
     transition: background-color 250ms ease-in-out;
 }
 
-li:hover, li:focus-within {
+.bookmarks > a:hover {
     background-color: var(--bookmark-hover-bg);
 }
 
-li > a {
-    padding-left: 0.33em;
-    color: var(--bookmark-fg);
-}
-
-li img {
+.bookmarks > a > img {
     height: 32px;
     width: auto;
     vertical-align: middle;
+    padding-right: .5em;
 }
 
-details {
-    margin: 0.5rem 1rem;
+details > .bookmarks {
+    margin: 1em 0;
+    margin-left: 1.5em;
 }
 
-details > ul {
-    margin: 1em 0 0 1.5em;
-}
-
-details:not([open]) > summary {
-    font-weight: initial;
-    padding-left: initial;
-}
-
-details:not([open]):hover > summary, details[open] > summary, details > summary:focus-visible {
+details:not([open]):hover > summary, details[open] > summary {
     font-weight: 700;
-    padding-left: 0.5em;
+    padding-left: 1em;
 }
 
 summary {
     transition: padding-left 250ms ease-in-out;
     cursor: pointer;
+    border-radius: 0.25em;
+    margin: 0 0.5em;
+    padding: 0.25em 0.5em;
 }
 
 span.emoji {
