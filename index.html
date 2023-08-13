@@ -154,6 +154,16 @@
                 bookmark.prepend(favicon);
             }
         });
+        [...document.getElementsByTagName('details')].forEach((group, _, allGroups) => {
+            group.addEventListener('toggle', event => {
+                if (!event.target.open) return;
+                allGroups.forEach(item => {
+                    if (item === event.target) return;
+                    if (!item.open) return;
+                    item.removeAttribute('open');
+                });
+            });
+        });
     </script>
 </body>
 </html>
