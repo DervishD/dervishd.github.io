@@ -146,11 +146,16 @@
         </div>
     </details>
     <script>
+        // Other favicon services:
+        //  - Google: `https://www.google.com/s2/favicons?domain=${domain}&sz=32
+        //  - Icon Horse: `https://icon.horse/icon/${domain}`
+        //  - Besticon: `https://besticon-demo.herokuapp.com/icon?url=${domain}&size=32`
+        const getFavicon = domain => `https://icons.duckduckgo.com/ip3/${domain}.ico`;
         [...document.querySelectorAll('.bookmarks > a')].forEach(bookmark => {
             const target = new URL(bookmark.href);
             if (target.hostname) {
                 const favicon = document.createElement('img');
-                favicon.src = `http://www.google.com/s2/favicons?domain=${target.hostname}&sz=32`;
+                favicon.src = getFavicon(target.hostname);
                 bookmark.prepend(favicon);
             }
         });
