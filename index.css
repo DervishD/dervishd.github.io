@@ -107,6 +107,12 @@ header a:hover {
     background-color: initial;
 }
 
+header p {
+    font-size: .25em;
+    font-weight: 400;
+    margin: 0;
+}
+
 hr {
     height: 1px;
     border: none;
