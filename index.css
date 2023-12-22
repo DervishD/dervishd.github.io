@@ -160,17 +160,22 @@ details > .bookmarks {
     margin-left: 1.5em;
 }
 
+details {
+    margin-left: 1.5em;
+}
+
 details:not([open]):hover > summary, details[open] > summary {
     font-weight: 700;
     padding-left: 1em;
 }
 
 summary {
+    list-style-position: outside;
     transition: padding-left 250ms ease-in-out;
     cursor: pointer;
     border-radius: 0.25em;
     margin: 0 0.5em;
-    padding: 0.25em 0.5em;
+    padding: 0.25em;
 }
 
 span.emoji {
