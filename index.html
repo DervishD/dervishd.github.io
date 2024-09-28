@@ -155,6 +155,14 @@
         </div>
     </details>
     <script>
+        // Autorefresh.
+        const REFRESH_HOURS = 24
+        const MINUTES_PER_HOUR = 60
+        const SECONDS_PER_MINUTE = 60
+        const MILLISECONDS_PER_SECOND = 1000
+        const PAGE_REFRESH_MILLISECONDS = REFRESH_HOURS * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
+        window.onload = () => setInterval(() => location.reload(), PAGE_REFRESH_MILLISECONDS);
+
         // Other favicon services:
         //  - Google: `https://www.google.com/s2/favicons?domain=${domain}&sz=32
         //  - Icon Horse: `https://icon.horse/icon/${domain}`
