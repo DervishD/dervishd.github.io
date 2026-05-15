@@ -129,7 +129,7 @@
         const SECONDS_PER_MINUTE = 60
         const MILLISECONDS_PER_SECOND = 1000
         const PAGE_REFRESH_MILLISECONDS = REFRESH_HOURS * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
-        window.onload = () => setInterval(() => location.reload(), PAGE_REFRESH_MILLISECONDS);
+        window.onload = () => setInterval(() => navigator.onLine && location.reload(), PAGE_REFRESH_MILLISECONDS);
 
         // Other favicon services:
         //  - Google: `https://www.google.com/s2/favicons?domain=${domain}&sz=32
