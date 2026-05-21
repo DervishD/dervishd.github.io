@@ -123,37 +123,56 @@
         </div>
     </details>
     <script>
-        // Autorefresh.
-        const REFRESH_HOURS = 24
-        const MINUTES_PER_HOUR = 60
-        const SECONDS_PER_MINUTE = 60
-        const MILLISECONDS_PER_SECOND = 1000
-        const PAGE_REFRESH_MILLISECONDS = REFRESH_HOURS * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
-        window.onload = () => setInterval(() => navigator.onLine && location.reload(), PAGE_REFRESH_MILLISECONDS);
-
         // Other favicon services:
-        //  - Google: `https://www.google.com/s2/favicons?domain=${domain}&sz=32
-        //  - Icon Horse: `https://icon.horse/icon/${domain}`
-        //  - Besticon: `https://besticon-demo.herokuapp.com/icon?url=${domain}&size=32`
-        const getFavicon = domain => `https://icons.duckduckgo.com/ip3/${domain}.ico`;
-        [...document.querySelectorAll('.bookmarks > a')].forEach(bookmark => {
-            const target = new URL(bookmark.href);
-            if (target.hostname) {
+        //  - Google: `https://www.google.com/s2/favicons?domain=${hostname}&sz=32
+        //  - Icon Horse: `https://icon.horse/icon/${hostname}`
+        //  - Besticon: `https://besticon-demo.herokuapp.com/icon?url=${hostname}&size=32`
+        const faviconService = hostname => `https://icons.duckduckgo.com/ip3/${hostname}.ico`;
+        const SINGLE_OPEN_DETAIL_ELEMENTS = document.getElementsByTagName('details');
+        const PAGE_REFRESH_HOURS = 24
+
+
+        function scheduleAutoRefresh(refreshHours) {
+            const MILLISECONDS_PER_HOUR = 60 * 60 * 1000  // eslint-disable-line no-magic-numbers
+            setInterval(async () => {
+                try {
+                    await fetch(location.href, { method: 'HEAD', cache: 'no-store' });
+                    location.reload();
+                } catch {/**/}
+            }, refreshHours * MILLISECONDS_PER_HOUR);
+        }
+
+
+        function loadFavicons(getFaviconUrl) {
+            document.querySelectorAll('.bookmarks > a').forEach(bookmark => {
+                const { hostname } = new URL(bookmark.href);
+                if (!hostname) return;
                 const favicon = document.createElement('img');
-                favicon.src = getFavicon(target.hostname);
+                favicon.src = getFaviconUrl(hostname);
                 bookmark.prepend(favicon);
-            }
-        });
-        [...document.getElementsByTagName('details')].forEach((group, _, allGroups) => {
-            group.addEventListener('toggle', event => {
-                if (!event.target.open) return;
-                allGroups.forEach(item => {
-                    if (item === event.target) return;
-                    if (!item.open) return;
-                    item.removeAttribute('open');
+            });
+        }
+
+
+        function keepOnlyOneDetailOpen(detailElements) {
+            [...detailElements].forEach(element => {
+                element.addEventListener('toggle', event => {
+                    if (!event.target.open) return;
+                    [...detailElements].forEach(item => {
+                        if (item === event.target) return;
+                        if (!item.open) return;
+                        item.removeAttribute('open');
+                    })
                 });
             });
-        });
+        }
+
+
+        window.onload = () => {
+            scheduleAutoRefresh(PAGE_REFRESH_HOURS);
+            loadFavicons(faviconService);
+            keepOnlyOneDetailOpen(SINGLE_OPEN_DETAIL_ELEMENTS);
+        }
     </script>
 </body>
 </html>
